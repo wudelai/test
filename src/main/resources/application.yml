@@ -1,0 +1,65 @@
+server:
+  port: 8082
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+#    content-type: text/html
+  datasource:
+    username: root
+    password: root1234
+    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    data-username: root
+    data-password: root1234
+  #    initialSize: 10
+#    minIdle: 5
+#    maxActive: 160
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 6000
+#    minEvictableIdleTimeMillis: 3000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    filters: stat,wall,log4j
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#    useGlobalDataSourceStat: true
+#    removeAbandonedTimeout: 300
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    timeout: 0
+  #    pool:
+  #      max-wait: -1
+  #      max-idle: 8
+  #      min-idle: 0
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: myClusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: false
+            clusterCheckinInterval: 5000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 15
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: embedded
